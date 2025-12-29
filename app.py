@@ -15,6 +15,7 @@ st.markdown("""
 body {
     background-color: #0e1117;
     color: white;
+    font-family: 'Segoe UI', sans-serif;
 }
 .main {
     background-color: #0e1117;
@@ -40,12 +41,19 @@ body {
     font-size: 22px;
     font-weight: 600;
     text-align: center;
+    margin-top: 10px;
 }
 .footer {
     text-align: center;
     font-size: 12px;
     color: #6e7681;
     margin-top: 40px;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    margin: 20px 0;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -73,26 +81,41 @@ IMG_SIZE = 64
 
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, use_column_width=True)
+    st.image(image, use_container_width=True)
 
+    # Preprocess
     img = image.resize((IMG_SIZE, IMG_SIZE))
     img_array = np.array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
+    # Predict
     prediction = model.predict(img_array)[0][0]
 
-    st.markdown("<hr>", unsafe_allow_html=True)
-
+    # Determine surface type and landing risk
     if prediction > 0.5:
-        st.markdown(
-            f"<div class='result'>Crater Surface Detected<br>Confidence: {prediction:.2f}</div>",
-            unsafe_allow_html=True
-        )
+        surface = "Crater Surface"
+        landing_risk = "High Risk"
+        confidence = prediction
     else:
-        st.markdown(
-            f"<div class='result'>Smooth Surface Detected<br>Confidence: {1 - prediction:.2f}</div>",
-            unsafe_allow_html=True
-        )
+        surface = "Smooth Surface"
+        landing_risk = "Low Risk"
+        confidence = 1 - prediction
+
+    # Display results elegantly
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div class='result'><b>Surface:</b> {surface}</div>", unsafe_allow_html=True
+    )
+    st.markdown(
+        f"<div class='result'><b>Confidence:</b> {confidence:.2f}</div>", unsafe_allow_html=True
+    )
+
+    # Color-coded landing risk
+    risk_color = "red" if landing_risk == "High Risk" else "green"
+    st.markdown(
+        f"<div class='result' style='color:{risk_color}'><b>Landing Risk:</b> {landing_risk}</div>",
+        unsafe_allow_html=True
+    )
 
 st.markdown("</div>", unsafe_allow_html=True)
 
