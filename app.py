@@ -1,4 +1,7 @@
 import streamlit as st
+import os
+st.write("App is running!")
+st.write("Files in current directory:",os.listdir())
 import numpy as np
 from PIL import Image
 import tensorflow as tf
