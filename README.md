@@ -31,7 +31,7 @@ A **CNN-based Machine Learning project** that classifies lunar surface images in
 Open your terminal (or VS Code terminal) and run:
 
 ```bash
-git clone https://github.com/YourUsername/Lunar_ML_Project.git
+git clone https://github.com/Lexmiii/Lunar_ML_Project.git
 cd Lunar_ML_Project
 2️⃣ Install Dependencies
 Make sure Python 3.13+ is installed:
@@ -44,11 +44,11 @@ Copy code
 Bash
 streamlit run app.py
 The app will open in your browser. Upload a lunar surface image to see predictions.
-🎨 Demo
-Screenshot of app running locally:
-�
-Optional Demo Video / GIF:
-Watch Demo Video
+🎨 Video Demo
+
+[Watch Demo Video](https://drive.google.com/file/d/1e8u-nex5xmCsTRUhfGq5xlbkMHbNBsKw/view?usp=sharing)
+
+
 🧩 Project Structure
 Copy code
 
@@ -69,6 +69,6 @@ Enhance UI/UX with sliders or image history
 Extend classification to include lunar crater depth estimation or other surface features
 Incorporate real-time lunar imagery from NASA datasets
 🧑‍💻 Author
-Lekshmi – LinkedIn
+Lekshmi 
 📄 License
 MIT License – See LICENSE for details.
